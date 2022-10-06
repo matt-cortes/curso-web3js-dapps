@@ -34,11 +34,11 @@ const MainLayout = ({ children }) => {
         mx="auto"
         maxW={"7xl"}
         width="100%"
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue("redefine_green.500", "gray.800")}
         px={4}
       >
         <Flex
-          bg={useColorModeValue("white", "gray.800")}
+           bg={useColorModeValue("redefine_green.500", "gray.800")}
           color={useColorModeValue("gray.600", "white")}
           minH={"60px"}
           py={{ base: 2 }}
@@ -57,12 +57,6 @@ const MainLayout = ({ children }) => {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Flex alignItems="center">
-              <Image src="./images/platzi.svg" width="80px" />
-              <Heading size="md" color="purple" mt={0.2} ml={1}>
-                Punks
-              </Heading>
-            </Flex>
             <HStack
               as={"nav"}
               spacing={4}
