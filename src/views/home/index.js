@@ -164,7 +164,7 @@ const Home = () => {
           >
             Obtén tu punk
           </Button>
-          <Link to="/punks">
+          <Link to="/wallet/">
             <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
               Galería
             </Button>

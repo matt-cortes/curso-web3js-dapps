@@ -25,7 +25,7 @@ import {
     ModalCloseButton,
     Lorem,
     useDisclosure,
-  
+    useToast,
   } from "@chakra-ui/react";
   import { Link } from "react-router-dom";
   import { QuestionIcon, DragHandleIcon} from "@chakra-ui/icons";
@@ -36,10 +36,49 @@ import {
   import { useParams } from "react-router-dom";
   import Loading from "../../../components/loading";
   import { useState } from "react";
-  import usePlatziPunks from "../../../hooks/usePlatziPunks";
+  import usePruebaPago from "../../../hooks/usePruebaPago";
   
-  const Send = () => {
-      
+  const SendMoney = () => {
+    const pruebaPago = usePruebaPago();
+    const [isMinting, setIsMinting] = useState(false);
+    const [imageSrc, setImageSrc] = useState("");
+    const { active, account } = useWeb3React();
+    const toast = useToast();
+
+    const send = () => {
+      setIsMinting(true);
+  
+      pruebaPago.methods
+        .make_payment("0x60921B00d81Ba9da40614E5Da2CAAdE028bD9df2")
+        .send({
+          from: account,
+          value: 1000000000000000,
+        })
+        .on("transactionHash", (txHash) => {
+          toast({
+            title: "Transacción enviada",
+            description: txHash,
+            status: "info",
+          });
+        })
+        .on("receipt", () => {
+          setIsMinting(false);
+          toast({
+            title: "Transacción confirmada",
+            description: "Nunca pares de aprender.",
+            status: "success",
+          });
+        })
+        .on("error", (error) => {
+          setIsMinting(false);
+          toast({
+            title: "Transacción fallida",
+            description: error.message,
+            status: "error",
+          });
+        });
+    };
+
     return (
       <Stack
       spacing={{ base: 8, md: 10 }}
@@ -134,7 +173,8 @@ import {
                   fontWeight={"normal"}
                   px={6}
                   colorScheme={"redefine_green"}
-                  bg={"redefine_green.500"}>
+                  bg={"redefine_green.500"}
+                  onClick={send}>
                   Siguiente
                   </Button>
           </Stack>
@@ -172,5 +212,5 @@ import {
       
   };
   
-  export default Send;
+  export default SendMoney;
   

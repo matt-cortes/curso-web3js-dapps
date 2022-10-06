@@ -36,7 +36,7 @@ import {
   import { useParams } from "react-router-dom";
   import Loading from "../../../components/loading";
   import { useState } from "react";
-  import usePlatziPunks from "../../../hooks/usePlatziPunks";
+  import usePruebaPago from "../../../hooks/usePruebaPago";
   
   const Order = () => {
       
