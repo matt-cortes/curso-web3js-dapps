@@ -1,6 +1,6 @@
 import { useWeb3React } from "@web3-react/core";
 import { useCallback, useEffect, useState } from "react";
-import usePlatziPunks from "../usePlatziPunks";
+import usePruebaPago from "../usePruebaPago";
 
 const getPunkData = async ({ platziPunks, tokenId }) => {
   const [
@@ -72,7 +72,7 @@ const usePlatziPunksData = ({ owner = null } = {}) => {
   const [punks, setPunks] = useState([]);
   const { library } = useWeb3React();
   const [loading, setLoading] = useState(true);
-  const platziPunks = usePlatziPunks();
+  const platziPunks = usePruebaPago();
 
   const update = useCallback(async () => {
     if (platziPunks) {
@@ -123,7 +123,7 @@ const usePlatziPunksData = ({ owner = null } = {}) => {
 const usePlatziPunkData = (tokenId = null) => {
   const [punk, setPunk] = useState({});
   const [loading, setLoading] = useState(true);
-  const platziPunks = usePlatziPunks();
+  const platziPunks = usePruebaPago();
 
   const update = useCallback(async () => {
     if (platziPunks && tokenId != null) {

@@ -10,38 +10,72 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
-import usePlatziPunks from "../../hooks/usePlatziPunks";
+import usePruebaPago from "../../hooks/usePruebaPago";
 import { useCallback, useEffect, useState } from "react";
 
 const Home = () => {
   const [isMinting, setIsMinting] = useState(false);
   const [imageSrc, setImageSrc] = useState("");
   const { active, account } = useWeb3React();
-  const platziPunks = usePlatziPunks();
+  const pruebaPago = usePruebaPago();
   const toast = useToast();
 
-  const getPlatziPunksData = useCallback(async () => {
-    if (platziPunks) {
-      const totalSupply = await platziPunks.methods.totalSupply().call();
-      const dnaPreview = await platziPunks.methods
-        .deterministicPseudoRandomDNA(totalSupply, account)
-        .call();
-      const image = await platziPunks.methods.imageByDNA(dnaPreview).call();
-      setImageSrc(image);
-    }
-  }, [platziPunks, account]);
+  // const getPlatziPunksData = useCallback(async () => {
+  //   if (pruebaPago) {
+  //     const totalSupply = await pruebaPago.methods.totalSupply().call();
+  //     const dnaPreview = await pruebaPago.methods
+  //       .deterministicPseudoRandomDNA(totalSupply, account)
+  //       .call();
+  //     const image = await pruebaPago.methods.imageByDNA(dnaPreview).call();
+  //     setImageSrc(image);
+  //   }
+  // }, [pruebaPago, account]);
 
-  useEffect(() => {
-    getPlatziPunksData();
-  }, [getPlatziPunksData]);
+  // useEffect(() => {
+  //   getPlatziPunksData();
+  // }, [getPlatziPunksData]);
 
-  const mint = () => {
+  // const mint = () => {
+  //   setIsMinting(true);
+
+  //   pruebaPago.methods
+  //     .mint()
+  //     .send({
+  //       from: account,
+  //     })
+  //     .on("transactionHash", (txHash) => {
+  //       toast({
+  //         title: "Transacción enviada",
+  //         description: txHash,
+  //         status: "info",
+  //       });
+  //     })
+  //     .on("receipt", () => {
+  //       setIsMinting(false);
+  //       toast({
+  //         title: "Transacción confirmada",
+  //         description: "Nunca pares de aprender.",
+  //         status: "success",
+  //       });
+  //     })
+  //     .on("error", (error) => {
+  //       setIsMinting(false);
+  //       toast({
+  //         title: "Transacción fallida",
+  //         description: error.message,
+  //         status: "error",
+  //       });
+  //     });
+  // };
+
+  const send = () => {
     setIsMinting(true);
 
-    platziPunks.methods
-      .mint()
+    pruebaPago.methods
+      .make_payment("0x60921B00d81Ba9da40614E5Da2CAAdE028bD9df2")
       .send({
         from: account,
+        value: 1000000000000000,
       })
       .on("transactionHash", (txHash) => {
         toast({
@@ -124,8 +158,8 @@ const Home = () => {
             colorScheme={"green"}
             bg={"green.400"}
             _hover={{ bg: "green.500" }}
-            disabled={!platziPunks}
-            onClick={mint}
+            disabled={!pruebaPago}
+            onClick={send}
             isLoading={isMinting}
           >
             Obtén tu punk
@@ -163,7 +197,7 @@ const Home = () => {
               </Badge>
             </Flex>
             <Button
-              onClick={getPlatziPunksData}
+              //onClick={getPlatziPunksData}
               mt={4}
               size="xs"
               colorScheme="green"

@@ -19,13 +19,13 @@ import { usePlatziPunkData } from "../../hooks/usePlatziPunksData";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/loading";
 import { useState } from "react";
-import usePlatziPunks from "../../hooks/usePlatziPunks";
+import usePruebaPago from "../../hooks/usePruebaPago";
 
 const Punk = () => {
   const { active, account, library } = useWeb3React();
   const { tokenId } = useParams();
   const { loading, punk, update } = usePlatziPunkData(tokenId);
-  const platziPunks = usePlatziPunks();
+  const platziPunks = usePruebaPago();
   const toast = useToast();
   const [transfering, setTransfering] = useState(false);
 
