@@ -1,14 +1,14 @@
 # reDeFine Pay
 
-This is the frontend application. We can access it via any IPFS with the hash: "bafybeidpbaw36ozmpjcf2dbccismkxp6tcsph4urk4xowx7h3zp7zwt4uy"
+This repository contains the frontend application. We can access to it with the hash "bafybeidpbaw36ozmpjcf2dbccismkxp6tcsph4urk4xowx7h3zp7zwt4uy" via any public gateway [from this list](https://ipfs.github.io/public-gateway-checker/)
 
-To use it just connect your MetaMask wallet via RSK Testnet.
+To start using it, just connect your MetaMask wallet via RSK Testnet and make sure you have some tRBTC tokens in your account.
 
 The smart contracts and all backend-related files are located in [this repository](https://github.com/matt-cortes/rsk-hardhat-starter)
 
-Also, the Figma Prototype can be accessed [from here](https://www.figma.com/proto/T9K8ASdSGge46NktX5Isls/Talent-Hackathon-Blockchain?page-id=25%3A2&node-id=320%3A102&viewport=-4453%2C2845%2C0.24&scaling=min-zoom&starting-point-node-id=320%3A102)
+The Figma Prototype can be accessed [from here](https://www.figma.com/proto/T9K8ASdSGge46NktX5Isls/Talent-Hackathon-Blockchain?page-id=25%3A2&node-id=320%3A102&viewport=-4453%2C2845%2C0.24&scaling=min-zoom&starting-point-node-id=320%3A102)
 
-## Getting Started with Create React App
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
