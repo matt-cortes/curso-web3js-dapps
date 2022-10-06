@@ -44,7 +44,7 @@ import {
           py={{ base: 20, md: 28 }}
           direction={{ base: "column"}}
           bg='redefine_green.500' w='100%' height={{ base: "550px", sm: "600px", lg: "650px" }}
-          color='white' borderBottomRadius={"200px"}>
+          color='white' borderBottomRadius={{ base: "600px"}}>
           {active ? (
             <>
               <Heading
