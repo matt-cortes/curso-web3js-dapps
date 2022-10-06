@@ -21,6 +21,7 @@ import {
   import usePruebaPago from "../../hooks/usePruebaPago";
   import { useCallback, useEffect, useState } from "react";
   import { CheckCircleIcon, CalendarIcon} from "@chakra-ui/icons";
+  import WalletData from "../../layouts/main/wallet-data";
   
     const Wallet = () => {
       const [isMinting, setIsMinting] = useState(false);
@@ -28,6 +29,7 @@ import {
     const { active, account } = useWeb3React();
     const platziPunks = usePruebaPago();
     const toast = useToast();
+    const balance = WalletData();
   
     return (
       
@@ -72,7 +74,7 @@ import {
                     zIndex: -1,
                   }}
                 >
-                  584 RDOC
+                  0.015 
                 </Text>
                 <br />
                 <Text as={"span"} color={"white"} fontSize={{ base: "3xl", sm: "3xl", lg: "6xl" }}>

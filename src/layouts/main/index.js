@@ -16,8 +16,8 @@ import WalletData from "./wallet-data";
 
 const Links = [
   {
-    name: "Home",
-    to: "/",
+    name: "Wallet",
+    to: "/wallet",
   },
   {
     name: "Punks",

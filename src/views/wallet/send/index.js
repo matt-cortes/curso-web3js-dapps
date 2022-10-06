@@ -16,42 +16,38 @@ import {
     IconButton,
     SimpleGrid,
     Image,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure,
+    handleChange,
     useToast,
   } from "@chakra-ui/react";
-  import { Link } from "react-router-dom";
   import { QuestionIcon, DragHandleIcon} from "@chakra-ui/icons";
   import { useWeb3React } from "@web3-react/core";
-  import RequestAccess from "../../../components/request-access";
-  import PunkCard from "../../../components/punk-card";
-  import { usePlatziPunkData } from "../../../hooks/usePlatziPunksData";
-  import { useParams } from "react-router-dom";
-  import Loading from "../../../components/loading";
   import { useState } from "react";
   import usePruebaPago from "../../../hooks/usePruebaPago";
+  import Web3 from "web3";
   
   const SendMoney = () => {
     const pruebaPago = usePruebaPago();
     const [isMinting, setIsMinting] = useState(false);
-    const [imageSrc, setImageSrc] = useState("");
     const { active, account } = useWeb3React();
     const toast = useToast();
-
+    const contract_address = "";
+    
+    const [linkPago, setLinkPago] = useState('');
+    const [address, setAdddress] = useState('');
+    const [quantity, setQuantity] = useState('');
+    
     const send = () => {
       setIsMinting(true);
+      const taransaction = {
+        'address' : address,
+        'quantity': quantity
+      }
   
       pruebaPago.methods
-        .make_payment("0x60921B00d81Ba9da40614E5Da2CAAdE028bD9df2")
+        .make_payment(taransaction.address)
         .send({
           from: account,
-          value: 1000000000000000,
+          value: Web3.utils.toWei(taransaction.quantity),
         })
         .on("transactionHash", (txHash) => {
           toast({
@@ -76,7 +72,10 @@ import {
             status: "error",
           });
         });
+        
     };
+
+    
 
     return (
       <Stack
@@ -90,7 +89,7 @@ import {
           <Text fontSize="lg">Puedes enviar dinero a través de un link de pago, un código QR o ingresando los datos manualmente.</Text>
           
           <SimpleGrid columns={2} spacing={3}>
-              <Input placeholder='Ingresa link de pago' size='md' />
+              <Input placeholder='Ingresa link de pago' size='md'  />
               <IconButton
                   variant='outline'
                   colorScheme='teal'
@@ -106,17 +105,19 @@ import {
           <Stack spacing={3}>
               <FormControl>
                   <FormLabel>Dirección de destino</FormLabel>
-                  <Input type='text' />
+                  <Input 
+                    type='text' 
+                    id="address" 
+                    onChange={e => setAdddress(e.target.value)} 
+                  />
               </FormControl>
               <FormControl>
                   <FormLabel>Monto</FormLabel>
-                  <NumberInput defaultValue={0.05} precision={2} step={0.2}>
-                      <NumberInputField />
-                      <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                      </NumberInputStepper>
-                  </NumberInput>
+                  <Input 
+                    type='number' 
+                    id="quantity" 
+                    onChange={e => setQuantity(e.target.value)} 
+                  />
                   <FormHelperText align="right">Equivalente a: $180.63 MX</FormHelperText>
               </FormControl>
               <FormControl>
@@ -165,7 +166,6 @@ import {
                       _hover={{ bg: "white", color:"redefine_green.600" }}
                     />
               </Text>
-              
               
               <Button rounded={"full"}
                   size={"lg"}
